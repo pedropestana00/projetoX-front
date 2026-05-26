@@ -2,13 +2,15 @@ import React, { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import TweetCard from '../components/TweetCard';
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+
 const ExploreFeed: React.FC = () => {
     const [tweets, setTweets] = useState<any[]>([]);
     const token = localStorage.getItem('token');
 
     const carregarFeedGlobal = async () => {
         try {
-            const response = await fetch('http://localhost:3000/tweets/global', {
+            const response = await fetch(`${API_URL}/tweets/global`, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
             if (response.ok) {

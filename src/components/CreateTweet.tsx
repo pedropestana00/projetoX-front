@@ -4,6 +4,8 @@ interface CreateTweetProps {
     onTweetCreated: () => void; // Função que atualiza o feed quando crias um tweet
 }
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+
 const CreateTweet: React.FC<CreateTweetProps> = ({ onTweetCreated }) => {
     const [texto, setTexto] = useState('');
     const [imagem, setImagem] = useState<File | null>(null);
@@ -21,7 +23,7 @@ const CreateTweet: React.FC<CreateTweetProps> = ({ onTweetCreated }) => {
 
         try {
             const token = localStorage.getItem('token');
-            const response = await fetch('http://localhost:3000/tweets', {
+            const response = await fetch(`${API_URL}/tweets`, {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${token}`

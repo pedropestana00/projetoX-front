@@ -5,6 +5,7 @@ interface TweetCardProps {
     tweet: any;
     onRefresh: () => void;
 }
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
 
 const TweetCard: React.FC<TweetCardProps> = ({ tweet, onRefresh }) => {
     const [showComments, setShowComments] = useState(false);
@@ -28,7 +29,7 @@ const TweetCard: React.FC<TweetCardProps> = ({ tweet, onRefresh }) => {
     const handleUpdate = async () => {
         if (!editText.trim()) return;
         try {
-            const response = await fetch(`http://localhost:3000/tweets/${tweet.id_tweet}`, {
+            const response = await fetch(`${API_URL}/tweets/${tweet.id_tweet}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -49,7 +50,7 @@ const TweetCard: React.FC<TweetCardProps> = ({ tweet, onRefresh }) => {
     const handleDelete = async () => {
         if (!window.confirm('Deseja eliminar este tweet e todos os seus comentários associados?')) return;
         try {
-            const response = await fetch(`http://localhost:3000/tweets/${tweet.id_tweet}`, {
+            const response = await fetch(`${API_URL}/tweets/${tweet.id_tweet}`, {
                 method: 'DELETE',
                 headers: { 'Authorization': `Bearer ${token}` }
             });
@@ -62,7 +63,7 @@ const TweetCard: React.FC<TweetCardProps> = ({ tweet, onRefresh }) => {
     // Lógica de Toggle do Like (Insert/Delete)
     const handleLike = async () => {
         try {
-            const response = await fetch(`http://localhost:3000/likes/tweets/${tweet.id_tweet}`, {
+            const response = await fetch(`${API_URL}/likes/tweets/${tweet.id_tweet}`, {
                 method: 'POST',
                 headers: { 'Authorization': `Bearer ${token}` }
             });
@@ -73,7 +74,7 @@ const TweetCard: React.FC<TweetCardProps> = ({ tweet, onRefresh }) => {
     // Lógica de Toggle do Follow (Insert/Delete)
     const handleFollow = async () => {
         try {
-            const response = await fetch(`http://localhost:3000/follows/utilizadores/${tweet.id_utilizador}`, {
+            const response = await fetch(`${API_URL}/follows/utilizadores/${tweet.id_utilizador}`, {
                 method: 'POST',
                 headers: { 'Authorization': `Bearer ${token}` }
             });
@@ -128,7 +129,7 @@ const TweetCard: React.FC<TweetCardProps> = ({ tweet, onRefresh }) => {
             {/* Renderiza a imagem estática do Multer caso ela exista */}
             {tweet.imagem && (
                 <div style={{ marginBottom: '15px' }}>
-                    <img src={`http://localhost:3000${tweet.imagem}`} alt="Imagem do tweet" style={{ maxWidth: '100%', borderRadius: '10px', maxHeight: '300px', objectFit: 'cover' }} />
+                    <img src={`${API_URL}${tweet.imagem}`} alt="Imagem do tweet" style={{ maxWidth: '100%', borderRadius: '10px', maxHeight: '300px', objectFit: 'cover' }} />
                 </div>
             )}
 

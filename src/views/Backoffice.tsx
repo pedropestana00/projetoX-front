@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar';
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
 
 const Backoffice: React.FC = () => {
     const [tweets, setTweets] = useState<any[]>([]);
@@ -18,7 +19,7 @@ const Backoffice: React.FC = () => {
 
     const carregarTodosTweets = async () => {
         try {
-            const response = await fetch('http://localhost:3000/tweets/global', {
+            const response = await fetch(`${API_URL}/tweets/global`, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
             if (response.ok) {
@@ -32,7 +33,7 @@ const Backoffice: React.FC = () => {
 
     const carregarUtilizadores = async () => {
         try {
-            const response = await fetch('http://localhost:3000/user', {
+            const response = await fetch(`${API_URL}/user`, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
             if (response.ok) {
@@ -56,7 +57,7 @@ const Backoffice: React.FC = () => {
 
         try {
             // Comunica com o teu Back-end passando o ID correto do tweet
-            const response = await fetch(`http://localhost:3000/tweets/${id_tweet}`, {
+            const response = await fetch(`${API_URL}/tweets/${id_tweet}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -80,7 +81,7 @@ const Backoffice: React.FC = () => {
         if (!window.confirm('Tem a certeza de que deseja eliminar este tweet permanentemente para moderação?')) return;
 
         try {
-            const response = await fetch(`http://localhost:3000/tweets/${id}`, {
+            const response = await fetch(`${API_URL}/tweets/${id}`, {
                 method: 'DELETE',
                 headers: { 'Authorization': `Bearer ${token}` }
             });
@@ -100,7 +101,7 @@ const Backoffice: React.FC = () => {
     const handleEditarUtilizador = async (id_utilizador: number) => {
         if (!editUsername.trim() || !editEmail.trim()) return;
         try {
-            const response = await fetch(`http://localhost:3000/user/${id_utilizador}`, {
+            const response = await fetch(`${API_URL}/user/${id_utilizador}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -122,7 +123,7 @@ const Backoffice: React.FC = () => {
     const handleEliminarUtilizador = async (id_utilizador: number) => {
         if (!window.confirm('Tem a certeza de que deseja excluir este utilizador? Todas as suas publicações serão removidas.')) return;
         try {
-            const response = await fetch(`http://localhost:3000/user/${id_utilizador}`, {
+            const response = await fetch(`${API_URL}/user/${id_utilizador}`, {
                 method: 'DELETE',
                 headers: { 'Authorization': `Bearer ${token}` }
             });

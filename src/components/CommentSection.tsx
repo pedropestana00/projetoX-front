@@ -6,15 +6,17 @@ interface CommentSectionProps {
     tweetId: number;
     idDonoDoTweet: number;
 }
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
 
 const CommentSection: React.FC<CommentSectionProps> = ({ tweetId, idDonoDoTweet }) => {
     const [comentarios, setComentarios] = useState<any[]>([]);
     const [novoTexto, setNovoTexto] = useState('');
     const token = localStorage.getItem('token');
 
+
     const carregarComentarios = async () => {
         try {
-            const response = await fetch(`http://localhost:3000/comments/tweets/${tweetId}`, {
+            const response = await fetch(`${API_URL}/comments/tweets/${tweetId}`, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
             if (response.ok) {
@@ -33,7 +35,7 @@ const CommentSection: React.FC<CommentSectionProps> = ({ tweetId, idDonoDoTweet 
         if (!novoTexto) return;
 
         try {
-            const response = await fetch(`http://localhost:3000/comments/tweets/${tweetId}`, {
+            const response = await fetch(`${API_URL}/comments/tweets/${tweetId}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

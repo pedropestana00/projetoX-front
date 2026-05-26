@@ -6,6 +6,8 @@ interface CommentItemProps {
     onRefresh: () => void;
 }
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+
 const CommentItem: React.FC<CommentItemProps> = ({ comentario, idDonoDoTweet, onRefresh }) => {
     const [isEditing, setIsEditing] = useState(false);
     const [editText, setEditText] = useState(comentario.texto);
@@ -29,7 +31,7 @@ const CommentItem: React.FC<CommentItemProps> = ({ comentario, idDonoDoTweet, on
     const handleUpdate = async () => {
         if (!editText.trim()) return;
         try {
-            const response = await fetch(`http://localhost:3000/comments/${comentario.id_comentario}`, {
+            const response = await fetch(`${API_URL}/comments/${comentario.id_comentario}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -47,7 +49,7 @@ const CommentItem: React.FC<CommentItemProps> = ({ comentario, idDonoDoTweet, on
     const handleDelete = async () => {
         if (!window.confirm('Deseja eliminar este comentário?')) return;
         try {
-            const response = await fetch(`http://localhost:3000/comments/${comentario.id_comentario}`, {
+            const response = await fetch(`${API_URL}    /comments/${comentario.id_comentario}`, {
                 method: 'DELETE',
                 headers: { 'Authorization': `Bearer ${token}` }
             });
