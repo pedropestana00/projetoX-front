@@ -7,8 +7,11 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
+  "homepage": "https://pedropestana00.github.io/projetoX-front",
   "dependencies": {
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
