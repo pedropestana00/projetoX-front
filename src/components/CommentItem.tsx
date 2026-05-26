@@ -49,7 +49,7 @@ const CommentItem: React.FC<CommentItemProps> = ({ comentario, idDonoDoTweet, on
     const handleDelete = async () => {
         if (!window.confirm('Deseja eliminar este comentário?')) return;
         try {
-            const response = await fetch(`${API_URL}    /comments/${comentario.id_comentario}`, {
+            const response = await fetch(`${API_URL}/comments/${comentario.id_comentario}`, {
                 method: 'DELETE',
                 headers: { 'Authorization': `Bearer ${token}` }
             });
