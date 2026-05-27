@@ -17,7 +17,7 @@ const Navbar: React.FC = () => {
 
     return (
         <nav style={{ width: '250px', padding: '20px', borderRight: '1px solid #ccc', height: '100vh', position: 'fixed' }}>
-            <h2>👋 {user?.name}</h2>
+            <h2>👋 {user?.username}</h2>
             <ul style={{ listStyle: 'none', padding: 0 }}>
                 <li style={{ margin: '20px 0' }}><Link to="/">🏠 Página Inicial</Link></li>
                 <li style={{ margin: '20px 0' }}><Link to="/explore">🌐 Explorar</Link></li>
