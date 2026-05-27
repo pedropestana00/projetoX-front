@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
+import Header from '../components/Header';
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
 
 const Backoffice: React.FC = () => {
@@ -138,6 +140,8 @@ const Backoffice: React.FC = () => {
     };
 
     return (
+    <>
+    <Header />
     <div style={{ display: 'flex', fontFamily: 'Arial' }}>
         <Navbar />
         <div style={{ marginLeft: '270px', padding: '20px', width: '950px' }}>
@@ -291,7 +295,9 @@ const Backoffice: React.FC = () => {
                 </>
             )}
         </div>
-    </div>    
+    </div> 
+    <Footer />
+    </>   
     );
 };
 

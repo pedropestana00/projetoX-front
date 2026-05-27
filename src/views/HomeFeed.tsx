@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import CreateTweet from '../components/CreateTweet';
 import TweetCard from '../components/TweetCard';
+import Footer from '../components/Footer';
+import Header from '../components/Header';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
 
@@ -28,21 +30,25 @@ const HomeFeed: React.FC = () => {
     }, []);
 
     return (
-        <div style={{ display: 'flex', fontFamily: 'Arial' }}>
-            <Navbar />
-            <div style={{ marginLeft: '270px', padding: '20px', width: '600px' }}>
-                <h2 style={{ borderBottom: '1px solid #eee', paddingBottom: '10px' }}>Página Inicial</h2>
-                <CreateTweet onTweetCreated={carregarFeed} />
+        <>
+            <Header />
+            <div style={{ display: 'flex', fontFamily: 'Arial' }}>
+                <Navbar />
+                <div style={{ marginLeft: '270px', padding: '20px', width: '600px' }}>
+                    <h2 style={{ borderBottom: '1px solid #eee', paddingBottom: '10px' }}>Página Inicial</h2>
+                    <CreateTweet onTweetCreated={carregarFeed} />
                 
-                {tweets.length === 0 ? (
-                    <p style={{ color: '#555', textAlign: 'center', marginTop: '20px' }}>Ainda não segue ninguém ou ninguém publicou nada. Vá à página Explorar!</p>
-                ) : (
-                    tweets.map(t => (
-                        <TweetCard key={t.id_tweet} tweet={t} onRefresh={carregarFeed} />
-                    ))
-                )}
+                    {tweets.length === 0 ? (
+                        <p style={{ color: '#555', textAlign: 'center', marginTop: '20px' }}>Ainda não segue ninguém ou ninguém publicou nada. Vá à página Explorar!</p>
+                        ) : (
+                        tweets.map(t => (
+                            <TweetCard key={t.id_tweet} tweet={t} onRefresh={carregarFeed} />
+                        ))
+                    )}
+                </div>
             </div>
-        </div>
+            <Footer />
+        </>
     );
 };
 

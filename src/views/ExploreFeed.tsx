@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import TweetCard from '../components/TweetCard';
+import Footer from '../components/Footer';
+import Header from '../components/Header';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
 
@@ -27,6 +29,8 @@ const ExploreFeed: React.FC = () => {
     }, []);
 
     return (
+        <>
+        <Header />
         <div style={{ display: 'flex', fontFamily: 'Arial' }}>
             <Navbar />
             <div style={{ marginLeft: '270px', padding: '20px', width: '600px' }}>
@@ -37,6 +41,8 @@ const ExploreFeed: React.FC = () => {
                 ))}
             </div>
         </div>
+        <Footer />
+        </>
     );
 };
 
