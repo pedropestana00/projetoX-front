@@ -8,6 +8,8 @@ use user:"admin" password "123" to test backoffice
 - [Overview](#overview)
 - [Technology Stack](#technology-stack)
 - [Project Structure](#project-structure)
+- [Architecture](#architecture)
+- [Technical Decisions](#technical-decisions)
 - [Getting Started](#getting-started)
 - [Development](#development)
 - [Building](#building)
@@ -54,6 +56,103 @@ src/
 └── main.tsx        # Application entry point
 public/            # Static assets
 ```
+
+## 🏛 Architecture
+
+### Layered Architecture
+
+ProjetoX Frontend follows a **component-based layered architecture** designed for scalability and maintainability:
+
+#### **1. Presentation Layer (Components & Pages)**
+- **Components**: Reusable, isolated React components with single responsibilities
+- **Pages**: Page-level components that compose multiple components and manage page-specific logic
+- All components are written in TypeScript with strict typing
+
+#### **2. Business Logic Layer (Hooks & Utils)**
+- **Custom Hooks**: Encapsulate stateful logic and API interactions
+- **Utility Functions**: Pure functions for data transformation, formatting, and calculations
+- Logic is separated from presentation for easier testing and reusability
+
+#### **3. Type System Layer (Types)**
+- Centralized TypeScript definitions ensure consistency across the application
+- Shared interfaces and types reduce duplication and improve IDE support
+
+#### **4. Styling Layer (Styles)**
+- Global styles for application-wide theming
+- Component-scoped styles for isolated styling concerns
+
+### Component Organization
+
+Components follow this pattern:
+- Functional components using React hooks
+- Props interfaces for type safety
+- Composition over inheritance
+- Single Responsibility Principle (SRP)
+
+## 🎯 Technical Decisions
+
+### 1. **TypeScript over JavaScript**
+**Decision**: Use TypeScript for 97.9% of the codebase
+- **Rationale**: 
+  - Compile-time type checking catches errors early
+  - Improved IDE support and auto-completion
+  - Self-documenting code through type annotations
+  - Easier refactoring and maintenance
+  - Better team collaboration with explicit contracts
+
+### 2. **Vite as Build Tool**
+**Decision**: Chosen over Create React App and Webpack
+- **Rationale**:
+  - Significantly faster development server startup
+  - Lightning-fast HMR (Hot Module Replacement)
+  - Smaller bundle sizes through better tree-shaking
+  - Modern, ES module-first approach
+  - Better build performance for production
+
+### 3. **Component-Based Architecture**
+**Decision**: Organize code around reusable, composable components
+- **Rationale**:
+  - Improves code reusability and DRY principle
+  - Easier to test individual components
+  - Clearer separation of concerns
+  - Facilitates team development and code reviews
+  - Scales well as the project grows
+
+### 4. **Custom Hooks for State Management**
+**Decision**: Leverage React hooks over external state management libraries
+- **Rationale**:
+  - Reduces bundle size and external dependencies
+  - React hooks are now mature and well-documented
+  - Simpler learning curve for new developers
+  - Sufficient for current project scope
+  - Can be extended with Context API or Redux if needed
+
+### 5. **Strict ESLint & Type Checking Configuration**
+**Decision**: Enable type-aware linting with recommended and strict rules
+- **Rationale**:
+  - Catches potential bugs during development
+  - Enforces consistent code style across the team
+  - Improves code quality and maintainability
+  - Reduces technical debt
+  - Integrates with CI/CD pipelines for quality gates
+
+### 6. **Modular Project Structure**
+**Decision**: Organize files by feature/function rather than by type
+- **Rationale**:
+  - Easier to locate related code
+  - Reduced import paths and complexity
+  - Facilitates feature-based development
+  - Simplifies navigation and understanding of codebase
+  - Better scalability as the project grows
+
+### 7. **React 18+ with Latest Features**
+**Decision**: Use modern React features and patterns
+- **Rationale**:
+  - Access to Concurrent Features and Suspense
+  - Performance improvements and optimizations
+  - Better developer experience
+  - Community support and ecosystem maturity
+  - Future-proof codebase
 
 ## 🚀 Getting Started
 
@@ -186,7 +285,7 @@ export default defineConfig([
 
 ### React Compiler
 
-The React Compiler is not enabled by default due to its impact on development and build performance. To enable it in your production configuration, see the [React Compiler documentation](https://react.dev/learn/react-compiler/installation).
+The React Compiler is not enabled by default due to its impact on development and build performance. To enable it in your production configuration, see the [React Compiler documentation](https://react.dev/learn/react-compiler).
 
 ### Additional ESLint Plugins
 
