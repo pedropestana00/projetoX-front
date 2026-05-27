@@ -1,6 +1,7 @@
 # ProjetoX Frontend
 
 A modern, type-safe React application built with TypeScript, Vite, and industry best practices.
+use user:"admin" password "123" to test backoffice
 
 ## 📋 Table of Contents
 
